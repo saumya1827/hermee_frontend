@@ -1,22 +1,11 @@
-import { API_BASE } from "./apiBase";
+const API_BASE = "https://hermee-backend.onrender.com";
 
-export const getCart = async (userId) => {
-  const res = await fetch(`${API_BASE}/api/cart/${userId}`);
-  return await res.json();
-};
-
-export const addToCart = async (userId, item) => {
-  const res = await fetch(`${API_BASE}/api/cart/${userId}`, {
+// Create order
+export async function createOrder(data) {
+  const res = await fetch(`${API_BASE}/api/orders`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(item),
+    body: JSON.stringify(data)
   });
-  return await res.json();
-};
-
-export const removeFromCart = async (userId, itemId) => {
-  const res = await fetch(`${API_BASE}/api/cart/${userId}/${itemId}`, {
-    method: "DELETE",
-  });
-  return await res.json();
-};
+  return res.json();
+}

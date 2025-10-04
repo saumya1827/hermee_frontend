@@ -1,17 +1,21 @@
-export const loginUser = async (email, password) => {
-  const res = await fetch("http://localhost:5000/api/users", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
-  });
-  return await res.json();
-};
+const API_BASE = "https://hermee-backend.onrender.com";
 
-export const registerUser = async (name, email, password) => {
-  const res = await fetch("http://localhost:5000/api/users/register", {
+// Login
+export async function loginUser(data) {
+  const res = await fetch(`${API_BASE}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email, password })
+    body: JSON.stringify(data)
   });
-  return await res.json();
-};
+  return res.json();
+}
+
+// Register
+export async function registerUser(data) {
+  const res = await fetch(`${API_BASE}/api/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+  return res.json();
+}
